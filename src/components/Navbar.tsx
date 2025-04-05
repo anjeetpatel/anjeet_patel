@@ -59,25 +59,29 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        isScrolled ? "bg-background/90 backdrop-blur-md shadow-lg" : "bg-transparent"
       } ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <nav className="container mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="#home" className="text-xl font-bold">
-          <span className="text-gradient">Anjeet</span>
+        <a href="#home" className="text-xl font-bold relative group">
+          <span className="text-gradient mr-1">Anjeet</span>
           <span className="text-foreground">Patel</span>
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
         </a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-1">
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <a
               key={item.href}
               href={item.href}
               className={`nav-link ${
                 activeSection === item.href.substring(1) ? "active" : ""
               }`}
+              style={{ 
+                transition: `all 0.3s ease-in-out ${index * 0.05}s`
+              }}
             >
               {item.label}
             </a>
@@ -86,17 +90,20 @@ const Navbar = () => {
 
         {/* Mobile Navigation Toggle */}
         <button
-          className="md:hidden flex items-center p-2 bg-white rounded-full shadow-md"
+          className="md:hidden flex items-center p-2 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          {isMenuOpen ? 
+            <X size={20} className="text-indigo-600" /> : 
+            <Menu size={20} className="text-blue-600" />
+          }
         </button>
       </nav>
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg border-t animate-fade-in">
+        <div className="md:hidden bg-gradient-to-b from-white to-blue-50 shadow-lg border-t animate-fade-in">
           <div className="container mx-auto px-6 py-6 flex flex-col space-y-4">
             {navItems.map((item, index) => (
               <a
@@ -107,8 +114,8 @@ const Navbar = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
                 style={{ 
-                  transitionDelay: `${index * 50}ms`,
-                  animation: 'fadeInRight 0.3s ease-out forwards',
+                  animationDelay: `${index * 50}ms`,
+                  animation: 'fadeInRight 0.5s ease-out forwards',
                   opacity: 0
                 }}
               >
