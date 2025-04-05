@@ -1,4 +1,3 @@
-
 import { User, Code, Monitor, Database } from "lucide-react";
 
 const AboutSection = () => {
