@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 220 33% 98%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -14,10 +14,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 222 47% 11%;
+    --primary: 222 84% 25%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96%;
+    --secondary: 220 14% 94%;
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 40% 96%;
@@ -33,7 +33,7 @@
     --input: 214 32% 91%;
     --ring: 222 84% 5%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -52,6 +52,16 @@
 
   .section {
     @apply scroll-mt-20;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
   }
 }
 
@@ -82,6 +92,18 @@
   }
   
   .skill-tag {
-    @apply bg-secondary text-secondary-foreground px-3 py-1 rounded-md text-sm font-medium;
+    @apply bg-white text-primary border border-primary/20 px-4 py-2 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-2;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-r from-primary/90 to-primary;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent;
   }
 }
